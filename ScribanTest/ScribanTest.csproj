@@ -10,4 +10,10 @@
     <PackageReference Include="Shark.PdfConvert" Version="1.0.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="basetemplate.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

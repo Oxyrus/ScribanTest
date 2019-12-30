@@ -2,6 +2,7 @@
 using Shark.PdfConvert;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace ScribanTest
 {
@@ -9,6 +10,8 @@ namespace ScribanTest
     {
         static void Main(string[] args)
         {
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var templateFile = File.ReadAllText($"{currentDirectory}/basetemplate.html");
             var pets = new List<Pet>
             {
                 new Pet
@@ -18,15 +21,13 @@ namespace ScribanTest
                 new Pet
                 {
                     Name = "Kaiser"
+                },
+                new Pet
+                {
+                    Name = "Keitty"
                 }
             };
-            var template = Template.Parse(@"
-                <ul>
-                    {{ for pet in pets }}
-                        <li>{{ pet.name }}</li>
-                    {{ end }}
-                </ul>
-            ");
+            var template = Template.Parse(templateFile);
             var result = template.Render(new { Pets = pets }).ToString();
             PdfConvert.Convert(new PdfConversionSettings
             {
